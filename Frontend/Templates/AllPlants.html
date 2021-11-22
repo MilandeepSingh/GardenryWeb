@@ -2,28 +2,29 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href=".\Packages\bootstrap-5.1.3-dist\css\bootstrap.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="..\Packages\bootstrap-5.1.3-dist\css\bootstrap.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
-
-    <script src=".\Packages\bootstrap-5.1.3-dist\js\bootstrap.min.js"></script>
-    <script src=".\Packages\jquery-3.6.0.min.js"></script>
-    <script src=".\Scripts\main.js"></script>
-    <title>Document</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+  <link rel="stylesheet" href="maincss.css">
+  
+  <script src="..\Packages\bootstrap-5.1.3-dist\js\bootstrap.js"></script>
+  <script src="..\Packages\jquery-3.6.0.min.js"></script>
+  <script src="..\Scripts\main.js"></script>
+  <title>All Plants</title>
 
     <style>
 
 body {
   font-family: "Sofia", sans-serif;
-  margin: 0%;
+  position: relative;
+  text-align: center;
 }
 
 #overlay {
-  position: fixed;
-  display: block;
+  position: absolute;
   width: 100%;
   height: 100%;
   top: 0;
@@ -45,11 +46,45 @@ html {
 </head>
 
 <body id="overlay">
+
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand ms-3" href="#">
+      <img style="width: 70px;" src="../Logo/logo.png" alt="logo">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="../index.html">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="MyPlants.html">My Plants</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="#">All Plants</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="NewPlant.html">New Plant</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="notes.html">My Notes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="newNote.html">New Note</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
     
-<h2 style="font-size:22px; color: white; text-align: center;">
+<h2 style="font-size:22px; color: white; text-align: center; margin-top: 80px;">
         Look out for new plants to be added to your space...
 </h2>
-  
+
+
 <div id='bag' class="container-fluid">
   <div class="row" id="r">
     <div class="col">
@@ -94,10 +129,11 @@ html {
 
 </div>
 
-<button onclick="addNewObj('Dummy Plant', 'images/dummy.png')">DUMMY PLANT</button>
+<!-- <button onclick="addNewObj('Dummy Plant', 'images/dummy.png')">DUMMY PLANT</button> -->
 
 <script>
- 
+
+
 $(document).ready(function() {
   let xhr = new XMLHttpRequest();
 xhr.open('get', 'http://localhost:3001/allplants');
@@ -107,7 +143,8 @@ xhr.onload = function() {
   var obj = JSON.parse(xhr.response);
   for(let i=0; i<obj.length; i++){
   let name = obj[i].plantname
-  addNewObj(name, 'images/dummy.png')
+  let sciname = obj[i].sciname
+  addNewObj(name+'('+sciname+')', 'images/dummy.png')
   }
 }
 });
@@ -143,6 +180,10 @@ xhr.onload = function() {
     //   'Plant name'+
     // '</div>'
     
-    document.getElementById('r').appendChild(d0);
+    document.getElementById('r').appendChild(d0);   
   }
 </script>
+
+
+</body>
+</html>

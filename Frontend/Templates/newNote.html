@@ -9,22 +9,20 @@
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
 
-    <script src=".\Packages\bootstrap-5.1.3-dist\js\bootstrap.js"></script>
-    <script src=".\Packages\jquery-3.6.0.min.js"></script>
-    <script src=".\Scripts\main.js"></script>
-    <title>Document</title>
+    <script src="..\Packages\bootstrap-5.1.3-dist\js\bootstrap.js"></script>
+    <script src="..\Packages\jquery-3.6.0.min.js"></script>
+    <title>New Note</title>
 
     <style>
 
 body {
   font-family: "Sofia", sans-serif;
-  margin: 0%;
+  position: relative;
   text-align: center;
 }
 
 #overlay {
-  position: fixed;
-  display: block;
+  position: absolute;
   width: 100%;
   height: 100%;
   top: 0;
@@ -52,32 +50,31 @@ label {
 </head>
 
 <body id="overlay" >
-
-
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-        <a class="navbar-brand ms-3" href="#">Navbar</a>
+        <a class="navbar-brand ms-3" href='#'><img style="width: 70px;" src="../logo/logo.png" alt="logo"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
   
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            <li class="nav-item">
+              <a class="nav-link" href="../index.html">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
+              <a class="nav-link" href="MyPlants.html">My Plants</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link disabled" href="#">Disabled</a>
+              <a class="nav-link" href="AllPlants.html">All Plants</a>
             </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-              <div class="dropdown-menu" aria-labelledby="dropdown01">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </div>
+            <li class="nav-item">
+              <a class="nav-link" href="NewPlant.html">New Plant</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="notes.html">My Notes</a>
+            </li>
+            <li class="nav-item  active">
+              <a class="nav-link" href="#">New Note</a>
             </li>
           </ul>
         </div>
@@ -85,23 +82,61 @@ label {
 
 
     
-<h2 style="font-size:22px; color: white; text-align: center;">
+<h2 style="font-size:28px; color: white; text-align: center; margin-top: 80px;">
         Got a huge harvest? write it in a note...
 </h2>
 
-<form style="background-color: whitesmoke; width: 60%; display: inline-block; margin-top: 30px; text-align: center;">
+<form method="POST" style="background-color: whitesmoke; width: 60%; display: inline-block; margin-top: 30px; text-align: center; background-color: rgba(0,0,0,0.5);">
   
-   <label for="note" style="width: 90%; font-size: 30px; font-weight: bold; margin-top: 20px; text-align: center;">
+   <label for="note" style="width: 90%; font-size: 30px; font-weight: bold; margin-top: 20px; text-align: center; color: white;">
     Write your note here :
     </label>
 
-    <textarea name="note" id="note" cols="30" rows="10" style="text-align: center; margin-top: 30px; margin-bottom: 20px; width: 70%;">gg</textarea>    
+    <textarea id="noteArea" name="note" id="note" name="note" cols="30" rows="9" style="text-align: center; margin-top: 30px; margin-bottom: 20px; width: 70%; font-size: 25px;"></textarea>    
 
     <br>
+
     <div>
-        <button style="margin-bottom: 30px; font-weight: bold; width: 15%; min-width: 90px; padding-top: 2%; padding-bottom: 2%; float: left; margin-left: 28%;">DISCARD</button>
-        <button style="margin-bottom: 30px; font-weight: bold; width: 15%; min-width: 90px; padding-top: 2%; padding-bottom: 2%; float: right; margin-right: 28%;">ADD</button>
-    </div>
+        <button type="button" onclick="reset()" style="margin-bottom: 30px; font-weight: bold; width: 15%; min-width: 90px; padding-top: 2%; padding-bottom: 2%; float: left; margin-left: 28%;">DISCARD</button>
+        <button type="button" onclick="doAct()" style="margin-bottom: 30px; font-weight: bold; width: 15%; min-width: 90px; padding-top: 2%; padding-bottom: 2%; float: right; margin-right: 28%;">ADD</button>
+    <script>
+
+      function reset(){
+        document.getElementById("noteArea").value=""
+      }
+
+      function doAct(){
+        $(document).ready(function() {
+let xhr = new XMLHttpRequest();
+
+var act = "http://localhost:3001/newNote"
+        var txt = document.getElementById("noteArea").value;
+        if(txt.replaceAll('\n','').trim()==""){
+          return;
+        }
+        var url = new URL(act);
+        url.searchParams.set('note', txt.trim());
+        console.log(url)
+        console.log(url.toString())
+
+xhr.open('get', url.toString());
+xhr.send();
+
+xhr.onload = function() {
+  /* var obj = JSON.parse(xhr.response);
+  for(let i=0; i<obj.length; i++){
+  let note = obj[i].note
+  let sma = obj[i].sma
+  let date = sma.slice(0, 10);
+  let time = sma.slice(11,16)
+  addNewObj(note, date, time)
+  console.log(note, date, time) 
+  }*/
+}});
+}
+      </script>
+    
+        </div>
  
 </form>
 

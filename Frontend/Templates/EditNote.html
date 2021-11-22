@@ -2,29 +2,27 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href=".\Packages\bootstrap-5.1.3-dist\css\bootstrap.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="..\Packages\bootstrap-5.1.3-dist\css\bootstrap.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
 
-    <script src=".\Packages\bootstrap-5.1.3-dist\js\bootstrap.min.js"></script>
-    <script src=".\Packages\jquery-3.6.0.min.js"></script>
-    <script src=".\Scripts\main.js"></script>
-    <title>Document</title>
+  <script src="..\Packages\bootstrap-5.1.3-dist\js\bootstrap.js"></script>
+  <script src="..\Packages\jquery-3.6.0.min.js"></script>
+  <script src="..\Scripts\main.js"></script>
+  <title>Edit Note</title>
 
     <style>
-
 body {
   font-family: "Sofia", sans-serif;
-  margin: 0%;
+  position: relative;
   text-align: center;
 }
 
 #overlay {
-  position: fixed;
-  display: block;
+  position: absolute;
   width: 100%;
   height: 100%;
   top: 0;
@@ -53,6 +51,37 @@ label {
 
 <body id="overlay" >
     
+
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand ms-3" href="#"><img style="width: 70px;" src="../logo/logo.png" alt="logo"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+  
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="../index.html">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="MyPlants.html">My Plants</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="AllPlants.html">All Plants</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="NewPlant.html">New Plant</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="notes.html">My Notes</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="newNote.html">New Note</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
 <h2 style="font-size:22px; color: white; text-align: center;">
         Easy space for you to edit your note...
 </h2>

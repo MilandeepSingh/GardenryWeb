@@ -1,22 +1,25 @@
-function includeHTML() {
-    var z, i, a, file, xhttp;
-    z = document.getElementsByTagName("*");
-    for (i = 0; i < z.length; i++) {
-      if (z[i].getAttribute("htmlSrc")) {
-        a = z[i].cloneNode(false);
-        file = z[i].getAttribute("htmlSrc");
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-          if (xhttp.readyState == 4 && xhttp.status == 200) {
-            a.removeAttribute("htmlSrc");
-            a.innerHTML = xhttp.responseText;
-            z[i].parentNode.replaceChild(a, z[i]);
-            myHTMLInclude();
-          }
-        }      
-        xhttp.open("GET", file, true);
-        xhttp.send();
-        return;
-      }
-    }
-  }
+
+// const http = require('http');
+  
+// const requestListener = (req, res)=>{
+//   console.log("Request is Incoming");
+      
+//   const responseData = {
+//       message:"Hello, GFG Learner",
+//     articleData:{
+//         articleName: "How to send JSON response from NodeJS",
+//         category:"NodeJS",
+//         status: "published"
+//     },
+//     endingMessage:"Visit Geeksforgeeks.org for more"
+//   }
+    
+//   const jsonContent = JSON.stringify(responseData);
+//   res.end(jsonContent);
+// };
+  
+// const server = http.createServer(requestListener);
+  
+// server.listen(3000,'localhost', function(){
+//     console.log("Server is Listening at Port 3000!");
+// });
