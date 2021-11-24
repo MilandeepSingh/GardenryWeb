@@ -87,52 +87,11 @@ html {
 
 <div id='bag' class="container-fluid">
   <div class="row" id="r">
-    <div class="col">
-      <div class="imgCell">
-        <img class="fill" src="images/mango.jpg" alt="Image">
-      </div>
-      Mango
-    </div>
-    <div class="col">
-      <div class="imgCell">
-        <img class="fill" src="images/chinaberry.jpg" alt="Image">
-      </div>
-      Chinaberry
-    </div>
-    <div class="col">
-      <div class="imgCell">
-        <img class="fill" src="images/brinjals.jpg" alt="Image">
-      </div>
-      Brinjal
-    </div>
-    <div class="col">
-      <div class="imgCell">
-        <img class="fill" src="images/cucumber.jpg" alt="Image">
-      </div>
-      Cucumber
-    </div>
-    <div class="col">
-      <div class="imgCell">
-        <img class="fill" src="images/peepal.jpg" alt="Image">
-      </div>
-      Peepal
-    </div>
-    <div class="col">
-      <div class="imgCell">
-        <img class="fill" src="images/tulsi.jpg" alt="Image">
-      </div>
-      Tulsi
-    </div>
-    
 
   </div>
-
 </div>
 
-<!-- <button onclick="addNewObj('Dummy Plant', 'images/dummy.png')">DUMMY PLANT</button> -->
-
 <script>
-
 
 $(document).ready(function() {
   let xhr = new XMLHttpRequest();
@@ -144,7 +103,7 @@ xhr.onload = function() {
   for(let i=0; i<obj.length; i++){
   let name = obj[i].plantname
   let sciname = obj[i].sciname
-  addNewObj(name+'('+sciname+')', 'images/dummy.png')
+  addNewObj(name+'('+sciname+')', 'images/'+name.toLowerCase()+'.jpg')
   }
 }
 });
@@ -152,15 +111,10 @@ xhr.onload = function() {
 
   function addNewObj(name, image){
 
-
-  var d0 = document.createElement("div");
+    var d0 = document.createElement("div");
     var d1 = document.createElement("div");
     var img = document.createElement("img");
-
-
-
     var text = document.createTextNode(name);
-    
 
     img.setAttribute('class', 'fill');
     img.setAttribute('src', image)
@@ -171,7 +125,7 @@ xhr.onload = function() {
 
     d1.appendChild(img);
     d0.appendChild(d1);
-    d0.appendChild(text)
+    d0.appendChild(text);
 
     // d.innerHTML= '<div class="col">'+
     //   '<div class="imgCell">'+
@@ -180,8 +134,9 @@ xhr.onload = function() {
     //   'Plant name'+
     // '</div>'
     
-    document.getElementById('r').appendChild(d0);   
+    document.getElementById('r').appendChild(d0);
   }
+
 </script>
 
 

@@ -97,7 +97,7 @@ label {
     <br>
 
     <div>
-        <button type="button" onclick="reset()" style="margin-bottom: 30px; font-weight: bold; width: 15%; min-width: 90px; padding-top: 2%; padding-bottom: 2%; float: left; margin-left: 28%;">DISCARD</button>
+        <button type="button" onclick="reset()" style="margin-bottom: 30px; font-weight: bold; width: 15%; min-width: 90px; padding-top: 2%; padding-bottom: 2%; float: left; margin-left: 28%;">CLEAR</button>
         <button type="button" onclick="doAct()" style="margin-bottom: 30px; font-weight: bold; width: 15%; min-width: 90px; padding-top: 2%; padding-bottom: 2%; float: right; margin-right: 28%;">ADD</button>
     <script>
 
@@ -121,18 +121,8 @@ var act = "http://localhost:3001/newNote"
 
 xhr.open('get', url.toString());
 xhr.send();
-
-xhr.onload = function() {
-  /* var obj = JSON.parse(xhr.response);
-  for(let i=0; i<obj.length; i++){
-  let note = obj[i].note
-  let sma = obj[i].sma
-  let date = sma.slice(0, 10);
-  let time = sma.slice(11,16)
-  addNewObj(note, date, time)
-  console.log(note, date, time) 
-  }*/
-}});
+window.location.href = "./notes.html";
+});
 }
       </script>
     

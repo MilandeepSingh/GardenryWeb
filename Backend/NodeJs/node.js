@@ -86,6 +86,24 @@ const requestListener = (req,res)=>{
         });
         break;
 
+        case '/newPlant':
+        res.writeHead(200, {'Content-Type': 'text/plain'});
+        res.write(req.url);
+        var q = url.parse(req.url, true).query;
+        var plantname = q.plant;
+        var qty = q.qty;
+        res.end(txt);
+        console.log(txt)
+        con.query("INSERT INTO MyPlants values ('"+plantname+"','"+ qty +"')", function (err, result, fields) {
+          if (err) throw err;
+          var responseData = result;
+          
+        const jsonContent = JSON.stringify(responseData);
+        console.log(jsonContent)
+        res.end(jsonContent);
+        });
+        break;
+
       default:
           console.log(pathname)
           res.end(JSON.stringify([{plantname:"PP"}]));
@@ -101,10 +119,6 @@ server.listen(3001,'localhost', function(){
     console.log("Server is Listening at Port 3001!");
 });
 
-
-  
-
-  
 //   con.query("CREATE DATABASE IF NOT EXISTS mydb", function (err, result) {
 //     if (err) throw err;
 //     console.log("Database created");
@@ -126,6 +140,19 @@ server.listen(3001,'localhost', function(){
   var sql = "create table if not exists Notes(note varchar(1000), sma timestamp, primary key(sma));";
   con.query(sql, function (err, result) {
     if (err) throw err;
-    console.log("Table created");
+    console.log("Table notes created");
   });
+
+  var sql = "create table if not exists MyPlants(plantname varchar(255) , qty int, primary key(plantname));";
+  con.query(sql, function (err, result) {
+    if (err) throw err;
+    console.log("Table MyPlants created");
+  });
+
+  var sql = "create table if not exists AllPlants(plantname varchar(255) , sciname varchar(255), primary key(plantname));";
+  con.query(sql, function (err, result) {
+    if (err) throw err;
+    console.log("Table AllPlants created");
+  });
+
 });
